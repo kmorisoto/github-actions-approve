@@ -26,6 +26,6 @@ jobs:
           git switch -c $(date +%Y%m%d%H%M%S)
           git add .
           git commit -m 'Update file'
-          gh pr create --title "Update file" 
+          gh pr create --title 'Update file'  --body 'aaa'
       
       
