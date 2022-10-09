@@ -1,0 +1,25 @@
+name: pr approve
+
+on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: create file
+        run: touch test/"$(date +%Y-%m-%dT%H:%M:%S)"
+        
+      - run: gh --version
+        
+      
