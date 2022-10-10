@@ -1,4 +1,4 @@
-name: pr approve
+name: approve & merge
 
 on:
   pull_request:
