@@ -10,14 +10,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  approve:
+  run_if:
+    if:  startsWith(github.head_ref, 'foo/')
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       PR_NUMBER: ${{ github.event.number }}
-
     steps:
-        - uses: actions/checkout@v3
-        - run: |
-            gh pr review $PR_NUMBER --approve
-            gh pr merge $PR_NUMBER --merge
+      - uses: actions/checkout@v3
+      - run: |
+          gh pr review $PR_NUMBER --approve
+          gh pr merge $PR_NUMBER --merge
