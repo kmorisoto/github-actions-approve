@@ -1,10 +1,11 @@
 name: pr approve
 
 on:
-#   push:
-#     branches: [ "main" ]
-#   pull_request:
-#     branches: [ "main" ]
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'foo/**'
 
   workflow_dispatch:
 
@@ -13,23 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR_NUMBER: ${{ github.event.number }}
 
     steps:
         - uses: actions/checkout@v3
         - run: |
-            gh pr review 5 --approve
-            gh pr merge 5 --merge
-
-#       - name: update file
-#         run: echo "$(date +%Y-%m-%dT%H:%M:%S)" >> test.txt
-        
-#       - run: |
-#           git config --local user.email "action@github.com"
-#           git config --local user.name "GitHub Action"
-#           git switch -c $(date +%Y%m%d%H%M%S)
-#           git add .
-#           git commit -m 'Update file'
-#           git push --set-upstream
-#           gh pr create --title 'Update file'  --body 'aaa'
-      
-      
+            gh pr review $PR_NUMBER --approve
+            gh pr merge $PR_NUMBER --merge
